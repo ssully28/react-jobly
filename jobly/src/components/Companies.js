@@ -19,7 +19,7 @@ export class Companies extends Component {
   render() {
 
     //const jobList = this.state.jobsList.map(j => <p>{j.title}</p>);
-    const companyList = this.state.companyList.map(c => <Company key={c.id} company={c} />);
+    const companyList = this.state.companyList.map(c => <Company key={c.handle} company={c} />);
 
     return (
       <div className="container">
