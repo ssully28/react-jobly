@@ -23,7 +23,7 @@ export class Companies extends Component {
 
     return (
       <div className="container">
-        <h1> Companies</h1>
+        <h1>Companies</h1>
         {companyList}
       </div>
     )
