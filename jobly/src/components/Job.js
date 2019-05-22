@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-export default class Job extends Component {
+class Job extends Component {
   render() {
     const job = this.props.job;
 
     return (
-
       <div className="card my-4">
         <div className="card-header">
           {job.title}
@@ -17,9 +17,11 @@ export default class Job extends Component {
             <br/>
             Equity: {job.equity}
           </p>
-          <a href="#" className="btn btn-primary">Apply</a>
+          <Link to="#" className="btn btn-primary">Apply</Link>
         </div>
       </div>
-    )
+    );
   }
 }
+
+export default Job;

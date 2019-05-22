@@ -2,22 +2,21 @@ import React, { Component } from 'react';
 import JoblyApi from '../JoblyApi';
 import Job from './Job';
 
-export class Jobs extends Component {
+class Jobs extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
-       jobsList: []
-    }
+      jobsList: []
+    };
   }
-  
+
   async componentDidMount() {
     let jobsList = await JoblyApi.getJobs();
-    this.setState({jobsList})
+    this.setState({ jobsList });
   }
 
   render() {
-
     //const jobList = this.state.jobsList.map(j => <p>{j.title}</p>);
     const jobList = this.state.jobsList.map(j => <Job key={j.id} job={j} />);
 
@@ -26,7 +25,7 @@ export class Jobs extends Component {
         <h1> Jobs:</h1>
         {jobList}
       </div>
-    )
+    );
   }
 }
 

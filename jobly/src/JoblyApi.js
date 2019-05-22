@@ -33,10 +33,20 @@ class JoblyApi {
     let res = await this.request(`companies`);
     return res.companies;
   }
-  
+
   static async getJobs() {
     let res = await this.request(`jobs`);
     return res.jobs;
+  }
+
+  static async login(params) {
+    let res = await this.request(`login`, params, 'POST');
+    return res.token;
+  }
+
+  static async register(params) {
+    let res = await this.request(`users`, params, 'POST');
+    return res.token;
   }
 }
 

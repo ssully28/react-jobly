@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-export default class Home extends Component {
+class Home extends Component {
   render() {
     return (
       <div>
@@ -8,6 +8,8 @@ export default class Home extends Component {
         <h1 className="display-1" >Jobly</h1>
         <h1> <em>le best place to get le jobs </em> </h1>
       </div>
-    )
+    );
   }
 }
+
+export default Home;

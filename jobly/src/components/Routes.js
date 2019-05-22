@@ -1,48 +1,77 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Jobs from './Jobs';
 import Home from './Home';
 import Login from './Login';
 import Companies from './Companies';
 import CompanyDetail from './CompanyDetail';
 import NavBar from './NavBar';
+import JoblyApi from '../JoblyApi';
 
-export class Routes extends Component {
+class Routes extends Component {
   constructor(props) {
-    super(props)
-  
+    super(props);
+
     this.state = {
       user: undefined,
-    }
+    };
+
     this.setAuthUser = this.setAuthUser.bind(this);
   }
 
-  setAuthUser() {
+  async setAuthUser(userState) {
+
+    try {
+
+      let result;
+
+      if (userState.isSignUp) {
+        let paramObj = userState;
+        delete paramObj.isSignUp;
+        result = await JoblyApi.register(paramObj);
+      } else {
+        const paramObj = {
+          username: userState.username,
+          password: userState.password
+        };
+
+        result = await JoblyApi.login(paramObj);
+      }
+
+      let user = {
+        _token: result,
+        username: userState.username
+      }
+      this.setState({ user });
+
+
+    } catch (err) {
+      console.log("ERROR:", err);
+
+    }
 
   }
-  
+
 
   render() {
     const companyDetail = props => {
       const { handle } = props.match.params;
-      return <CompanyDetail handle={handle}/>
+      return <CompanyDetail handle={handle} />
     }
 
     return (
-      <React.Fragment>
-        <BrowserRouter>
+      <BrowserRouter>
         <NavBar />
-          <Switch>
-            <Route exact path="/" render={ () => <Home />} />
-            <Route exact path="/login" render={ () => <Login setAuthUser={this.setAuthUser} />} />
-            <Route exact path="/jobs" render={ () => <Jobs />} />
-            <Route exact path="/companies" render={ () => <Companies />} />
-            <Route exact path="/companies/:handle" render={companyDetail} />
-          </Switch>
-        </BrowserRouter>
-      </React.Fragment>
-    )
+        <Switch>
+          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/login" render={(rtProps) => <Login {...rtProps} setAuthUser={this.setAuthUser} />} />
+          <Route exact path="/jobs" render={() => <Jobs />} />
+          <Route exact path="/companies" render={() => <Companies />} />
+          <Route exact path="/companies/:handle" render={companyDetail} />
+        </Switch>
+      </BrowserRouter>
+    );
   }
 }
 
-export default Routes
+export default Routes;
