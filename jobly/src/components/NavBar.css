@@ -1,0 +1,12 @@
+.nav-div {
+    background-color: slategray;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-bar-custom > a {
+    color:white;
+}
+
+h3 > a {
+    color: white;
+}

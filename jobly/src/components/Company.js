@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import './Company.css';
 
 export default class Company extends Component {
   render() {
@@ -7,15 +8,18 @@ export default class Company extends Component {
     return (
 
       <div className="card my-4">
-        <div className="card-header">
-          {company.name}
+        <div className="
+          card-header
+          d-flex
+          justify-content-start">
+          <a href={`/companies/${company.handle}`} className="">{company.name}</a>
+          
         </div>
         <div className="card-body">
           
           <p className="card-text">
             {company.description}
           </p>
-          <a href="#" className="btn btn-primary">Jobs</a>
         </div>
       </div>
     )
