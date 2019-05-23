@@ -7,12 +7,11 @@ function getCurrentUser() {
   if (joblyUser) {
     let parsedUser = JSON.parse(joblyUser);
     let user = jwt.decode(parsedUser._token);
-    //console.log(user);
+
     return user;
   } else {
     return null;
   }
-  
 
 }
 

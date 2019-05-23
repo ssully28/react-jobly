@@ -14,13 +14,14 @@ class JoblyApi {
       return (await axios({
         method: verb,
         url: `http://localhost:3001/${endpoint}`,
-        [verb === "get" ? "params" : "data"]: paramsOrData})).data;
-        // axios sends query string data via the "params" key,
-        // and request body data via the "data" key,
-        // so the key we need depends on the HTTP verb
+        [verb === "get" ? "params" : "data"]: paramsOrData
+      })).data;
+      // axios sends query string data via the "params" key,
+      // and request body data via the "data" key,
+      // so the key we need depends on the HTTP verb
     }
 
-    catch(err) {
+    catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.message;
       throw Array.isArray(message) ? message : [message];
@@ -63,6 +64,12 @@ class JoblyApi {
     let res = await this.request(`users/${username}`, params, 'PATCH');
     return res.user;
   }
+
+  static async applyToJob(id, username) {
+    let res = await this.request(`jobs/${id}/apply`, { username }, 'POST');
+    return res.message;
+  }
+
 }
 
 export default JoblyApi;
