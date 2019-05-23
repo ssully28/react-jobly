@@ -27,12 +27,15 @@ export default class Profile extends Component {
   }
 
   render() {
-    
     const { user } = this.state;
+
+    // Only display form once the user has really been updated
+    // if it contains 'iat', it has NOT been updated.
     const formToShow = (user.iat)
-    ? null
-    : <EditProfileForm user={user} updateUser={this.updateUser} />
-    return (
+      ? null
+      : <EditProfileForm user={user} updateUser={this.updateUser} />
+    
+      return (
       <div>
         {formToShow}
       </div>

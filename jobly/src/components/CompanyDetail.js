@@ -13,7 +13,7 @@ class CompanyDetail extends Component {
     super(props);
 
     this.state = {
-      company: undefined
+      company: null
     };
   }
 
