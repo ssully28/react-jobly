@@ -31,6 +31,7 @@ class Login extends Component {
     console.log('login handleSubmit fired');
     e.preventDefault();
     await this.props.setAuthUser(this.state);
+    // creates an empty object to reset state
     const newState = Object.keys(this.state).reduce((acc, key) => {
       typeof key === 'string' 
         ? acc[key] = '' 
