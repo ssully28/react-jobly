@@ -20,9 +20,9 @@ class Routes extends Component {
   }
 
   async setAuthUser(userState) {
-
+    console.log('setAuthUser fired');
+    
     try {
-
       let result;
 
       if (userState.isSignUp) {
@@ -34,7 +34,6 @@ class Routes extends Component {
           username: userState.username,
           password: userState.password
         };
-
         result = await JoblyApi.login(paramObj);
       }
 
@@ -42,12 +41,11 @@ class Routes extends Component {
         _token: result,
         username: userState.username
       }
-      this.setState({ user });
-
+      window.localStorage.setItem('joblyUser', JSON.stringify(user));
+      // this.setState({ user });
 
     } catch (err) {
       console.log("ERROR:", err);
-
     }
 
   }

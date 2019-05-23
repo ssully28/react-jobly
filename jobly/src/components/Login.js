@@ -27,17 +27,17 @@ class Login extends Component {
 
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
+    console.log('login handleSubmit fired');
     e.preventDefault();
-    this.props.setAuthUser(this.state);
-    this.setState({
-      isSignUp: false,
-      username: '',
-      password: '',
-      email: '',
-      first_name: '',
-      last_name: ''
-    });
+    await this.props.setAuthUser(this.state);
+    const newState = Object.keys(this.state).reduce((acc, key) => {
+      typeof key === 'string' 
+        ? acc[key] = '' 
+        : acc[key] = false;
+      return acc;
+    }, {});
+    this.setState({ newState });
 
     this.props.history.push("/jobs");
   }

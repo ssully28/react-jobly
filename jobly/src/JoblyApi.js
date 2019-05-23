@@ -2,10 +2,15 @@ import axios from 'axios';
 
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
-    paramsOrData._token = ( // for now, hardcode token for "testing"
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTU4NTQ1Mzc1fQ.UIZZjWKB4bO4n2RN3DnlIdbbj-6uwUETZZyqGHQiuWQ");
+    const parsed = JSON.parse(localStorage.getItem('joblyUser')) || null;
+    console.log(endpoint, 'JoblyApi request fired', parsed);
+    
+    const _token = parsed
+      ? parsed._token
+      : null;
+    paramsOrData._token = (_token); // for now, hardcode token for "testing"
 
-    console.debug("API Call:", endpoint, paramsOrData, verb);
+    // console.debug("API Call:", endpoint, paramsOrData, verb);
 
     try {
       return (await axios({
