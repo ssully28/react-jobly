@@ -14,8 +14,10 @@ export default class Profile extends Component {
     this.updateUser = this.updateUser.bind(this);
   }
 
-  updateUser(formData) {
+  async updateUser(formData) {
     // make our api call to update the user in the db
+    await JoblyApi.updateUser(formData);
+    this.props.history.push("/jobs");
   }
 
   async componentDidMount() {
@@ -25,7 +27,6 @@ export default class Profile extends Component {
   }
 
   render() {
-    console.log(this.state.user);
     
     const { user } = this.state;
     const formToShow = (user.iat)

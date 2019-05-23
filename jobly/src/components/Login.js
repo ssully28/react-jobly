@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 
 const formFieldArr = [
   ['username', 'Username'],
@@ -28,7 +27,6 @@ class Login extends Component {
   }
 
   async handleSubmit(e) {
-    console.log('login handleSubmit fired');
     e.preventDefault();
     await this.props.setAuthUser(this.state);
     // creates an empty object to reset state

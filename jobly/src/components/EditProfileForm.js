@@ -2,23 +2,23 @@ import React, { Component } from 'react';
 
 const formFieldArr = [
   ['username', 'Username'],
-  ['password', 'Password'],
   ['email', 'Email'],
   ['first_name', 'First Name'],
   ['last_name', 'Last Name'],
-  ['photo_url', 'photo_url']
+  ['photo_url', 'Photo URL'],
+  ['password', 'Password']
 ]
 
 class EditProfileForm extends Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     this.state = {
       username: this.props.user.username || '',
       email: this.props.user.email || '',
       first_name: this.props.user.first_name || '',
-      last_name: this.props.user.first_name || '',
+      last_name: this.props.user.last_name || '',
       photo_url: this.props.user.photo_url || '',
+      password: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +36,6 @@ class EditProfileForm extends Component {
     });
   }
 
-
   render() {
     let formToShow = formFieldArr.map(field => (
       <div className="form-group row" key={field[0]} >
@@ -45,20 +44,19 @@ class EditProfileForm extends Component {
           id={field[0]}
           onChange={this.handleChange}
           value={this.state[field[0]]}
-          type="text"
+          type={field[0] === 'password' ? 'password' : 'text'}
           name={field[0]}
           className="form-control col-9"
           required
         />
       </div>
     ));
-    console.log('l0l trying to render derp..');
-    console.log(this.state);
 
     return (
       <div>
         <form onSubmit={this.handleSubmit} >
           {formToShow}
+          <button className="btn btn-primary">Update</button>
         </form>
       </div>
     )

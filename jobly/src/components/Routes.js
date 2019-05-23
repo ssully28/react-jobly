@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Jobs from './Jobs';
 import Home from './Home';
 import Login from './Login';
@@ -14,15 +14,14 @@ class Routes extends Component {
     super(props);
 
     this.state = {
-      user: undefined,
+      user: undefined
     };
 
     this.setAuthUser = this.setAuthUser.bind(this);
   }
 
   async setAuthUser(userState) {
-    console.log('setAuthUser fired');
-    
+
     try {
       let result;
 
@@ -45,12 +44,15 @@ class Routes extends Component {
       window.localStorage.setItem('joblyUser', JSON.stringify(user));
       // this.setState({ user });
 
+      this.forceUpdate();
+
     } catch (err) {
       console.log("ERROR:", err);
     }
 
   }
 
+  // LOG OUT USER MOVED TO NAVBAR
 
   render() {
     const companyDetail = props => {
@@ -60,13 +62,13 @@ class Routes extends Component {
 
     return (
       <BrowserRouter>
-        <NavBar />
+      <NavBar />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/login" render={(rtProps) => <Login {...rtProps} setAuthUser={this.setAuthUser} />} />
           <Route exact path="/jobs" render={() => <Jobs />} />
           <Route exact path="/companies" render={() => <Companies />} />
-          <Route exact path="/profile" render={() => <Profile />} />
+          <Route exact path="/profile" render={(rtProps) => <Profile {...rtProps} />} />
           <Route exact path="/companies/:handle" render={companyDetail} />
         </Switch>
       </BrowserRouter>
