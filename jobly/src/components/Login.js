@@ -67,7 +67,7 @@ class Login extends Component {
           id={field[0]}
           onChange={this.handleChange}
           value={this.state[field[0]]}
-          type="text"
+          type={field[0] === 'password' ? 'password' : 'text'}
           name={field[0]}
           className="form-control col-9"
           required

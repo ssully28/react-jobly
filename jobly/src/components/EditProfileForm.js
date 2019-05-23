@@ -5,8 +5,8 @@ const formFieldArr = [
   ['password', 'Password'],
   ['email', 'Email'],
   ['first_name', 'First Name'],
-  ['photo_url', 'photo_url'],
-  ['last_name', 'Last Name']
+  ['last_name', 'Last Name'],
+  ['photo_url', 'photo_url']
 ]
 
 class EditProfileForm extends Component {
@@ -14,11 +14,11 @@ class EditProfileForm extends Component {
     super(props)
     console.log(this.props)
     this.state = {
-       username: this.props.user.username || '',
-       email: this.props.user.email || '',
-       first_name: this.props.user.first_name || '',
-       last_name: this.props.user.first_name || '',
-       photo_url: this.props.user.photo_url || '',
+      username: this.props.user.username || '',
+      email: this.props.user.email || '',
+      first_name: this.props.user.first_name || '',
+      last_name: this.props.user.first_name || '',
+      photo_url: this.props.user.photo_url || '',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,16 +26,16 @@ class EditProfileForm extends Component {
   }
 
   handleSubmit(e) {
-		e.preventDefault();
-		this.props.updateUser(this.state);
-	}
+    e.preventDefault();
+    this.props.updateUser(this.state);
+  }
 
   handleChange(e) {
-  	this.setState({
-			[e.target.name]: e.target.value
-		});
-	}
-  
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
 
   render() {
     let formToShow = formFieldArr.map(field => (
@@ -54,7 +54,7 @@ class EditProfileForm extends Component {
     ));
     console.log('l0l trying to render derp..');
     console.log(this.state);
-    
+
     return (
       <div>
         <form onSubmit={this.handleSubmit} >
