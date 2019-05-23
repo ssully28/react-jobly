@@ -6,6 +6,7 @@ import Login from './Login';
 import Companies from './Companies';
 import CompanyDetail from './CompanyDetail';
 import NavBar from './NavBar';
+import Profile from './Profile';
 import JoblyApi from '../JoblyApi';
 
 class Routes extends Component {
@@ -65,6 +66,7 @@ class Routes extends Component {
           <Route exact path="/login" render={(rtProps) => <Login {...rtProps} setAuthUser={this.setAuthUser} />} />
           <Route exact path="/jobs" render={() => <Jobs />} />
           <Route exact path="/companies" render={() => <Companies />} />
+          <Route exact path="/profile" render={() => <Profile />} />
           <Route exact path="/companies/:handle" render={companyDetail} />
         </Switch>
       </BrowserRouter>

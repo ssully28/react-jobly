@@ -3,8 +3,6 @@ import axios from 'axios';
 class JoblyApi {
   static async request(endpoint, paramsOrData = {}, verb = "get") {
     const parsed = JSON.parse(localStorage.getItem('joblyUser')) || null;
-    console.log(endpoint, 'JoblyApi request fired', parsed);
-    
     const _token = parsed
       ? parsed._token
       : null;
@@ -52,6 +50,11 @@ class JoblyApi {
   static async register(params) {
     let res = await this.request(`users`, params, 'POST');
     return res.token;
+  }
+
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
   }
 }
 
