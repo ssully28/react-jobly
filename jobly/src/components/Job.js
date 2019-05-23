@@ -4,11 +4,10 @@ import { getCurrentUser } from '../helpers';
 
 class Job extends Component {
 
-
   handleApply = async () => {
     let user = getCurrentUser();
 
-    const message = await JoblyApi.applyToJob(this.props.job.id, user.username);
+    await JoblyApi.applyToJob(this.props.job.id, user.username);
 
     let jobButton = document.getElementById(this.props.job.id);
     jobButton.classList.add("disabled");

@@ -13,10 +13,6 @@ class Routes extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      user: undefined
-    };
-
     this.setAuthUser = this.setAuthUser.bind(this);
   }
 
@@ -40,19 +36,15 @@ class Routes extends Component {
       let user = {
         _token: result,
         username: userState.username
-      }
+      };
+
       window.localStorage.setItem('joblyUser', JSON.stringify(user));
-      // this.setState({ user });
-
       this.forceUpdate();
-
     } catch (err) {
       console.log("ERROR:", err);
     }
 
   }
-
-  // LOG OUT USER MOVED TO NAVBAR
 
   render() {
     const companyDetail = props => {
