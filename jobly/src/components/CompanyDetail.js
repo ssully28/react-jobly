@@ -18,12 +18,17 @@ class CompanyDetail extends Component {
   }
 
   async componentDidMount() {
+    console.log(this.props.username);
+    
     let company = await JoblyApi.getCompany(this.props.handle, this.props.username);
     this.setState({ company });
   }
 
   render() {
     const { company } = this.state;
+    console.log('companyDetail: username: ',this.props.username);
+    console.log('CompanyDetail - company: ', company);
+    
 
     const jobList = this.state.company
       ? company.jobs.map(j => <Job key={j.id} job={j} />)

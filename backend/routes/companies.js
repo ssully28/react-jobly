@@ -29,11 +29,9 @@ router.get("/", authRequired, async function (req, res, next) {
 
 router.get("/:handle", authRequired, async function (req, res, next) {
   try {
-    const { username } = req.body;
-    const company = await Company.findOne(req.params.handle, username);
+    const company = await Company.findOne(req.params.handle, req.username);
     return res.json({company});
   }
-
   catch (err) {
     return next(err);
   }
@@ -51,11 +49,9 @@ router.post("/", adminRequired, async function (req, res, next) {
         message: validation.errors.map(e => e.stack)
       });
     }
-
     const company = await Company.create(req.body);
     return res.status(201).json({company});   // 201 CREATED
   }
-
   catch (err) {
     return next(err);
   }

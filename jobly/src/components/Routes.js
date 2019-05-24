@@ -9,6 +9,7 @@ import NavBar from './NavBar';
 import SearchResults from './SearchResults';
 import Profile from './Profile';
 import JoblyApi from '../JoblyApi';
+import { getCurrentUser } from '../helpers';
 
 class Routes extends Component {
   constructor(props) {
@@ -54,10 +55,15 @@ class Routes extends Component {
 
   }
 
+  componentDidMount() {
+    if (!this.state.user) {
+      const user = getCurrentUser();
+      this.setState({ user });
+    }
+  }
+
   async handleSearch(search) {
     let searchResults = await JoblyApi.search(search);
-    console.log(searchResults);
-    
     this.setState({ searchResults });
   }
 
@@ -70,7 +76,9 @@ class Routes extends Component {
   render() {
     const companyDetail = props => {
       const { handle } = props.match.params;
-      return <CompanyDetail handle={handle} username={this.state.user.username} />
+      return this.state.user
+        ? <CompanyDetail handle={handle} username={this.state.user.username} />
+        : null;
     }
 
     return (

@@ -47,9 +47,7 @@ class Job {
     if (data.offset !== undefined) {
       finalQuery = finalQuery + ` OFFSET ${parseInt(data.offset)} LIMIT 20`;
     }
-    console.log(`---------final query----->\n${finalQuery}\n`);
-    console.log(`---------query values----->\n${queryValues}`);
-    
+
     const jobsRes = await db.query(finalQuery, queryValues);
     return jobsRes.rows;
   }

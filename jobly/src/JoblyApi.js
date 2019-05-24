@@ -7,7 +7,6 @@ class JoblyApi {
       ? parsed._token
       : null;
     paramsOrData._token = (_token); // for now, hardcode token for "testing"
-    // console.debug("API Call:", endpoint, paramsOrData, verb);
 
     try {
       return (await axios({
