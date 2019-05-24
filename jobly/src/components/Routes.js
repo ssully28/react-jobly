@@ -13,6 +13,10 @@ class Routes extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      user: null,
+    }
+
     this.setAuthUser = this.setAuthUser.bind(this);
   }
 
@@ -39,6 +43,7 @@ class Routes extends Component {
       };
 
       window.localStorage.setItem('joblyUser', JSON.stringify(user));
+      this.setState({ user })
       this.forceUpdate();
     } catch (err) {
       console.log("ERROR:", err);
@@ -49,7 +54,7 @@ class Routes extends Component {
   render() {
     const companyDetail = props => {
       const { handle } = props.match.params;
-      return <CompanyDetail handle={handle} />
+      return <CompanyDetail handle={handle} username={this.state.user.username} />
     }
 
     return (
