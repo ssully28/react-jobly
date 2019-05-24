@@ -6,6 +6,7 @@ import Login from './Login';
 import Companies from './Companies';
 import CompanyDetail from './CompanyDetail';
 import NavBar from './NavBar';
+import SearchResults from './SearchResults';
 import Profile from './Profile';
 import JoblyApi from '../JoblyApi';
 
@@ -15,10 +16,12 @@ class Routes extends Component {
 
     this.state = {
       user: null,
+      searchResults: {jobs: [], companies: []},
     }
 
     this.setAuthUser = this.setAuthUser.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   async setAuthUser(userState) {
@@ -51,6 +54,13 @@ class Routes extends Component {
 
   }
 
+  async handleSearch(search) {
+    let searchResults = await JoblyApi.search(search);
+    console.log(searchResults);
+    
+    this.setState({ searchResults });
+  }
+
   logOut() {
     window.localStorage.removeItem('joblyUser');
     this.setState({user: null});
@@ -65,13 +75,14 @@ class Routes extends Component {
 
     return (
       <BrowserRouter>
-      <NavBar logOut={this.logOut} />
+      <NavBar handleSearch={this.handleSearch} logOut={this.logOut} />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/login" render={(rtProps) => <Login {...rtProps} setAuthUser={this.setAuthUser} />} />
           <Route exact path="/jobs" render={() => <Jobs />} />
           <Route exact path="/companies" render={() => <Companies />} />
           <Route exact path="/profile" render={(rtProps) => <Profile {...rtProps} />} />
+          <Route exact path="/search" render={(rtProps) => <SearchResults searchResults={this.state.searchResults} {...rtProps} />} />
           <Route exact path="/companies/:handle" render={companyDetail} />
         </Switch>
       </BrowserRouter>

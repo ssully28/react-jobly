@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import Search from './Search';
 import { withRouter } from 'react-router';
 import './NavBar.css';
 import { getCurrentUser } from '../helpers';
+import JoblyApi from '../JoblyApi';
 
 class NavBar extends Component {
 	constructor(props) {
@@ -39,10 +41,7 @@ class NavBar extends Component {
 							</Link>
 					</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0 ml-auto">
-						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form>
+				<Search handleSearch={this.props.handleSearch} />
 			</div>
 		);
 	}
