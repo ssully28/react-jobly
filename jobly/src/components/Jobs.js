@@ -10,7 +10,7 @@ class Jobs extends Component {
 		this.state = {
       offset: 0,
       jobCount: 0,
-			jobsList: [],
+			jobList: [],
 			errors: []
     };
     
@@ -19,9 +19,9 @@ class Jobs extends Component {
 
 	async componentDidMount() {
 		try {
-      let jobsList = await JoblyApi.getJobs(this.state.offset);
+      let jobList = await JoblyApi.getJobs(this.state.offset);
       let jobCount = await JoblyApi.getJobsCount();
-			this.setState({ jobsList, jobCount });
+			this.setState({ jobList, jobCount });
 		} catch (error) {
 			let errors = [ ...this.state.errors, error ];
 			this.setState({ errors });
@@ -29,28 +29,37 @@ class Jobs extends Component {
 		}
   }
 
-  async componentDidUpdate() {
-    try {
-			let jobsList = await JoblyApi.getJobs(this.state.offset);
-			this.setState({ jobsList });
-		} catch (error) {
-			let errors = [ ...this.state.errors, error ];
-			this.setState({ errors });
-			this.state.errors.push(error);
-		}
-  }
+  // async componentDidUpdate() {
+  // }
   
-  increaseOffset (bool) {
-    if (bool) {
-      this.setState(st => ({offset: st.offset + 20 }));
-    } else {
-      this.setState(st => ({offset: st.offset - 20 }));
+  async increaseOffset (bool) {
+    
+    try {
+      if (bool) {
+        const jobList = await JoblyApi.getJobs(this.state.offset+20);
+  
+        this.setState(st => ({
+          offset: st.offset + 20,
+          jobList: jobList
+        }));
+      } else {
+        const jobList = await JoblyApi.getJobs(this.state.offset-20);
+  
+        this.setState(st => ({
+          offset: st.offset - 20,
+          jobList: jobList
+        }));
+      }
+    } catch (error) {
+      let errors = [ ...this.state.errors, error ];
+      this.setState({ errors });
+      this.state.errors.push(error);
     }
   }
 
 	render() {
 		if (this.state.errors.length) return <Redirect to="/login" />;
-		const jobList = this.state.jobsList.map((j) => <Job key={j.id} job={j} />);
+		const jobList = this.state.jobList.map((j) => <Job key={j.id} job={j} />);
 
 		return (
 			<div className="container">
