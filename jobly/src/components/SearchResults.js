@@ -28,10 +28,9 @@ class SearchResults extends Component {
 
     return (
       <div>
-        sEaRcH ReS
-        yobbs
+        <h1> Jobs </h1>
         {jobList}
-        comps
+        <h1> Companies </h1>
         {compList}
       </div>
     )
