@@ -60,14 +60,15 @@ class Login extends Component {
 
     let formToShow = formFieldArr.map(field => (
       <div className="form-group row" key={field[0]} >
-        <label className="col-3" htmlFor={field[0]}> {field[1]} </label>
+        <label className="col-md-3 mr-2" htmlFor={field[0]}> {field[1]} </label>
         <input
           id={field[0]}
           onChange={this.handleChange}
           value={this.state[field[0]]}
           type={field[0] === 'password' ? 'password' : 'text'}
           name={field[0]}
-          className="form-control col-9"
+          className="form-control col-md-8"
+          placeholder={field[1]}
           required
         />
       </div>
@@ -88,13 +89,16 @@ class Login extends Component {
             <p className="btn-link" onClick={this.toggleForm} > {this.state.isSignUp ? 'already a user? log in' : 'new user? sign up!'} </p>
           </div>
         </div>
-        <form
-          onSubmit={this.handleSubmit}
-          className="form-group"
-        >
-          {formToShow}
-          <button className="btn btn-success" >{buttonLabel}</button>
-        </form>
+        <div className="row d-flex justify-content-center" >
+
+          <form
+            onSubmit={this.handleSubmit}
+            className="form-group col-md-8"
+          >
+            {formToShow}
+            <button className="btn btn-success" >{buttonLabel}</button>
+          </form>
+        </div>
       </div>
     );
   }
