@@ -9,6 +9,7 @@ class Jobs extends Component {
 
 		this.state = {
       offset: 0,
+      jobCount: 0,
 			jobsList: [],
 			errors: []
     };
@@ -18,8 +19,9 @@ class Jobs extends Component {
 
 	async componentDidMount() {
 		try {
-			let jobsList = await JoblyApi.getJobs(this.state.offset);
-			this.setState({ jobsList });
+      let jobsList = await JoblyApi.getJobs(this.state.offset);
+      let jobCount = await JoblyApi.getJobsCount();
+			this.setState({ jobsList, jobCount });
 		} catch (error) {
 			let errors = [ ...this.state.errors, error ];
 			this.setState({ errors });
@@ -61,7 +63,11 @@ class Jobs extends Component {
           onClick={()=>this.increaseOffset(false)}
         > Back </button>
 
-        <button className="btn btn-primary mx-3" onClick={()=>this.increaseOffset(true)}> Forward </button>
+        <button 
+          className="btn btn-primary mx-3" 
+          onClick={()=>this.increaseOffset(true)}
+          disabled={this.state.jobCount - this.state.offset <= 20 ? true : false}
+        > Forward </button>
 
 			</div>
 		);

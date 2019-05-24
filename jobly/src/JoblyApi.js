@@ -43,6 +43,11 @@ class JoblyApi {
     return res.jobs;
   }
 
+  static async getJobsCount() {
+    let res = await this.request(`jobs`);
+    return res.jobs.length;
+  }
+
   static async login(params) {
     let res = await this.request(`login`, params, 'POST');
     return res.token;
