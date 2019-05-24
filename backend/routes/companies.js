@@ -29,7 +29,8 @@ router.get("/", authRequired, async function (req, res, next) {
 
 router.get("/:handle", authRequired, async function (req, res, next) {
   try {
-    const company = await Company.findOne(req.params.handle);
+    const { username } = req.body;
+    const company = await Company.findOne(req.params.handle, username);
     return res.json({company});
   }
 
