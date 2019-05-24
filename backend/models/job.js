@@ -20,6 +20,7 @@ class Job {
     // For each possible search term, add to whereExpressions and
     // queryValues so we can generate the right SQL
 
+    
     if (data.min_salary) {
       queryValues.push(+data.min_employees);
       whereExpressions.push(`min_salary >= $${queryValues.length}`);
@@ -40,8 +41,13 @@ class Job {
     }
 
     // Finalize query and return results
-
     let finalQuery = baseQuery + whereExpressions.join(" AND ");
+    
+    // Add the following for pagination:
+    if (data.offset !== undefined) {
+      finalQuery = finalQuery + ` OFFSET ${parseInt(data.offset)} LIMIT 20`;
+    }
+
     const jobsRes = await db.query(finalQuery, queryValues);
     return jobsRes.rows;
   }

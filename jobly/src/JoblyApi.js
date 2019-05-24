@@ -7,7 +7,6 @@ class JoblyApi {
       ? parsed._token
       : null;
     paramsOrData._token = (_token); // for now, hardcode token for "testing"
-
     // console.debug("API Call:", endpoint, paramsOrData, verb);
 
     try {
@@ -38,8 +37,9 @@ class JoblyApi {
     return res.companies;
   }
 
-  static async getJobs() {
-    let res = await this.request(`jobs`);
+  static async getJobs(offset) {
+    let res = await this.request(`jobs`, {offset});
+
     return res.jobs;
   }
 

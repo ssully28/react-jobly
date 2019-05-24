@@ -23,17 +23,17 @@ class NavBar extends Component {
 		return (
 			<ul className="navbar-nav ml-auto">
 				<li className="nav-item mr-4">
-					<NavLink className="nav-link" exact to="/companies" activeClassName="active">
+					<NavLink className="nav-link" to="/companies" activeClassName="active">
 						Companies
 					</NavLink>
 				</li>
 				<li className="nav-item mr-4">
-					<NavLink className="nav-link" exact to="/jobs" activeClassName="active">
+					<NavLink className="nav-link" to="/jobs" activeClassName="active">
 						Jobs
 					</NavLink>
 				</li>
         <li className="nav-item mr-4">
-            <Link className="nav-link" exact to="/" onClick={this.logUserOut} activeClassName="active">
+            <Link className="nav-link" to="/" onClick={this.logUserOut}>
               Log Out
             </Link>
         </li>
@@ -45,7 +45,7 @@ class NavBar extends Component {
 		return (
 			<ul className="navbar-nav ml-auto">
 				<li className="nav-item mr-4">
-					<Link className="nav-link" exact to="/Login">
+					<Link className="nav-link" to="/Login">
 						Log In
 					</Link>
 				</li>
