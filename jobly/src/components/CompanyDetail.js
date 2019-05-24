@@ -18,7 +18,7 @@ class CompanyDetail extends Component {
   }
 
   async componentDidMount() {
-    let company = await JoblyApi.getCompany(this.props.handle);
+    let company = await JoblyApi.getCompany(this.props.handle, this.props.username);
     this.setState({ company });
   }
 
