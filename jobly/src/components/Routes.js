@@ -18,6 +18,7 @@ class Routes extends Component {
     }
 
     this.setAuthUser = this.setAuthUser.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   async setAuthUser(userState) {
@@ -43,12 +44,17 @@ class Routes extends Component {
       };
 
       window.localStorage.setItem('joblyUser', JSON.stringify(user));
-      this.setState({ user })
-      this.forceUpdate();
+      this.setState({ user }); 
     } catch (err) {
       console.log("ERROR:", err);
     }
 
+  }
+
+  logOut() {
+    window.localStorage.removeItem('joblyUser');
+    this.setState({user: null});
+    this.forceUpdate();
   }
 
   render() {
@@ -59,7 +65,7 @@ class Routes extends Component {
 
     return (
       <BrowserRouter>
-      <NavBar />
+      <NavBar logOut={this.logOut} />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/login" render={(rtProps) => <Login {...rtProps} setAuthUser={this.setAuthUser} />} />

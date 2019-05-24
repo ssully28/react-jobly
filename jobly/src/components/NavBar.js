@@ -14,7 +14,7 @@ class NavBar extends Component {
 	}
 
 	logUserOut() {
-		window.localStorage.removeItem('joblyUser');
+    this.props.logOut();
 		this.forceUpdate();
 		this.props.history.push('/');
 	}
@@ -59,14 +59,12 @@ class NavBar extends Component {
 		const logInOrOut = user ? this.loggedInNav() : this.loggedOutNav();
 
 		return (
-			
-				<nav className="nav-bar-custom navbar navbar-expand-md">
+				<nav className="nav-bar-custom navbar navbar-expand-md mb-3">
           <Link className="navbar-brand" to="/">
             Jobly
           </Link>
 					{logInOrOut}
 				</nav>
-			
 		);
 	}
 }
