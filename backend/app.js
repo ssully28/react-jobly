@@ -16,11 +16,13 @@ app.use(morgan("tiny"));
 const usersRoutes = require("./routes/users");
 const companiesRoutes = require("./routes/companies");
 const jobsRoutes = require("./routes/jobs");
+const searchRoute = require("./routes/search");
 const authRoutes = require("./routes/auth");
 
 app.use("/companies", companiesRoutes);
 app.use("/jobs", jobsRoutes);
 app.use("/users", usersRoutes);
+app.use("/search", searchRoute);
 app.use("/", authRoutes);
 
 /** 404 handler */

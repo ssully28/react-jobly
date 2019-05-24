@@ -21,35 +21,44 @@ class NavBar extends Component {
 
 	loggedInNav() {
 		return (
-			<ul className="navbar-nav ml-auto">
-				<li className="nav-item mr-4">
-					<NavLink className="nav-link" to="/companies" activeClassName="active">
-						Companies
-					</NavLink>
-				</li>
-				<li className="nav-item mr-4">
-					<NavLink className="nav-link" to="/jobs" activeClassName="active">
-						Jobs
-					</NavLink>
-				</li>
-        <li className="nav-item mr-4">
-            <Link className="nav-link" to="/" onClick={this.logUserOut}>
-              Log Out
-            </Link>
-        </li>
-			</ul>
+			<div className="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul className="navbar-nav">
+					<li className="nav-item mr-4">
+						<NavLink className="nav-link" to="/companies" activeClassName="active">
+							Companies
+						</NavLink>
+					</li>
+					<li className="nav-item mr-4">
+						<NavLink className="nav-link" to="/jobs" activeClassName="active">
+							Jobs
+						</NavLink>
+					</li>
+					<li className="nav-item mr-4">
+							<Link className="nav-link" to="/" onClick={this.logUserOut}>
+								Log Out
+							</Link>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0 ml-auto">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+			</div>
 		);
 	}
 
 	loggedOutNav() {
 		return (
-			<ul className="navbar-nav ml-auto">
-				<li className="nav-item mr-4">
-					<Link className="nav-link" to="/Login">
-						Log In
-					</Link>
-				</li>
-			</ul>
+			<div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<ul className="navbar-nav ml-auto">
+					<li className="nav-item mr-4">
+						<Link className="nav-link" to="/Login">
+							Log In
+						</Link>
+					</li>
+				</ul>
+			</div>
 		);
 	}
 
@@ -59,12 +68,13 @@ class NavBar extends Component {
 		const logInOrOut = user ? this.loggedInNav() : this.loggedOutNav();
 
 		return (
-				<nav className="nav-bar-custom navbar navbar-expand-md mb-3">
+			<nav className="nav-bar-custom navbar navbar-expand-md mb-3">
           <Link className="navbar-brand" to="/">
             Jobly
           </Link>
 					{logInOrOut}
-				</nav>
+		</nav>
+
 		);
 	}
 }
